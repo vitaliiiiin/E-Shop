@@ -8,53 +8,62 @@ using System.Threading.Tasks;
 
 namespace MyStore.Controllers
 {
-    public class ProductController : Controller
+    public class ManufacturerController : Controller
     {
         private readonly ApplicationDbContext _db;
 
-        public ProductController(ApplicationDbContext db)
+        public ManufacturerController(ApplicationDbContext db)
         {
             _db = db;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Product> objList = _db.Products;
-
-            foreach (var obj in objList)
-            {
-                obj.Category = _db.Categories.FirstOrDefault(x => x.Id == obj.Category.Id);
-            }
-
+            IEnumerable<Manufacturer> objList = _db.Manufacturers;
             return View(objList);
         }
 
-        // GET - UPSERT
-        public IActionResult Upsert(int? id) // if id is not null, so an item is to edit
-        {                                    // otherwise - to create
-            var product = new Product();
+        // GET - CREATE
+        public IActionResult Create()
+        {
+            return View();
+        }
 
-            if (id is null)
-            {
-                return View(product); // this is for create
-            }
+        // POST - CREATE
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Manufacturer obj)
+        {
+            _db.Manufacturers.Add(obj);
+            _db.SaveChanges();
 
-            product = _db.Products.Find(id);
+            return RedirectToAction("Index");
+        }
 
-            if (product is null)
+        // GET - EDIT
+        public IActionResult Edit(int? id)
+        {
+            if (id is null || id == 0)
             {
                 return NotFound();
             }
 
-            return View(product); // this is for edit
+            var obj = _db.Manufacturers.Find(id);
+
+            if (obj is null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
         }
 
-        // POST - UPSERT
+        // POST - EDIT
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Product obj)
+        public IActionResult Edit(Manufacturer obj)
         {
-            _db.Products.Add(obj);
+            _db.Manufacturers.Update(obj);
             _db.SaveChanges();
 
             return RedirectToAction("Index");
@@ -68,7 +77,7 @@ namespace MyStore.Controllers
                 return NotFound();
             }
 
-            var obj = _db.Products.Find(id);
+            var obj = _db.Manufacturers.Find(id);
 
             if (obj is null)
             {
@@ -81,9 +90,9 @@ namespace MyStore.Controllers
         // POST - DELETE
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(Product obj)
+        public IActionResult Delete(Manufacturer obj)
         {
-            _db.Products.Remove(obj);
+            _db.Manufacturers.Remove(obj);
             _db.SaveChanges();
 
             return RedirectToAction("Index");
