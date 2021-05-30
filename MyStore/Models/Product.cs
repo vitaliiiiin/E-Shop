@@ -16,7 +16,7 @@ namespace MyStore.Models
         public string Description { get; set; }
         [Range(1, int.MaxValue)]
         public double Price { get; set; }
-        public string ImagePath { get; set; }
+        public string Image { get; set; }
         public virtual Category Category { get; set; }
     }
 }
