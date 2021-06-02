@@ -39,7 +39,7 @@
                         </li>
                         <li>
                             <a asp-action="Index" asp-controller="Cart" class="nav-link active">
-                                @{ 
+                                @{
                                     var count = httpContextAccessor.HttpContext.Session
                                         .Get<List<ShoppingCart>>(WebConstants.SessionCart)?.Count ?? 0;
                                 }
@@ -47,6 +47,7 @@
                             </a>
                         </li>
                     </ul>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
