@@ -9,6 +9,7 @@ namespace MyStore.Models.ViewModels
     public class ProductVM
     {
         public Product Product { get; set; }
-        public IEnumerable<SelectListItem> DropDownCategoriesList { get; set; }
+        public IEnumerable<SelectListItem> DropDownCategories { get; set; }
+        public IEnumerable<SelectListItem> DropDownManufacturers { get; set; }
     }
 }
