@@ -35,9 +35,8 @@ namespace MyStore.Controllers
         // GET - UPSERT
         public IActionResult Upsert(int? id) // if id is not null, so an item is to edit
         {                                    // otherwise - to create
-            ProductVM productVM = new ProductVM
+            ProductVM productVM = new ProductVM()
             {
-                Product = new Product(),
                 DropDownCategories = _db.Categories.Select(c =>
                 new SelectListItem
                 {
