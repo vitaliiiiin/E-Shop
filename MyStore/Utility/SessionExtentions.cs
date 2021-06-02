@@ -17,7 +17,7 @@ namespace MyStore.Utility
         public static T Get<T>(this ISession session, string key)
         {
             var value = session.GetString(key);
-            return value is null ? default(T) : JsonSerializer.Deserialize<T>(value);
+            return value is null ? default : JsonSerializer.Deserialize<T>(value);
         }
     }
 }
