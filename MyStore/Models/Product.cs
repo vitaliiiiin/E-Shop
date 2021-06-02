@@ -20,8 +20,10 @@ namespace MyStore.Models
         public double Price { get; set; }
         public string Image { get; set; }
         public int CategoryId { get; set; }
+        [ForeignKey(nameof(CategoryId))]
         public virtual Category Category { get; set; }
         public int ManufacturerId { get; set; }
+        [ForeignKey(nameof(ManufacturerId))]
         public virtual Manufacturer Manufacturer { get; set; }
     }
 }
