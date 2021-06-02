@@ -27,14 +27,9 @@ namespace MyStore.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> objList = _db.Products;
+            IEnumerable<Product> productList = _db.Products.Include(i => i.Category).Include(i => i.Manufacturer);
 
-            foreach (var obj in objList)
-            {
-                obj.Category = _db.Categories.FirstOrDefault(x => x.Id == obj.Id);
-            }
-
-            return View(objList);
+            return View(productList);
         }
 
         // GET - UPSERT
@@ -43,8 +38,13 @@ namespace MyStore.Controllers
             ProductVM productVM = new ProductVM
             {
                 Product = new Product(),
-
-                DropDownCategoriesList = _db.Categories.Select(c =>
+                DropDownCategories = _db.Categories.Select(c =>
+                new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString()
+                }),
+                DropDownManufacturers = _db.Manufacturers.Select(c =>
                 new SelectListItem
                 {
                     Text = c.Name,
@@ -95,7 +95,7 @@ namespace MyStore.Controllers
                 }
                 else // update
                 {
-                    var objFromDbToEdit = _db.Products.AsNoTracking().FirstOrDefault(i => i.Id == productVM.Product.Id);
+                    var objFromDb = _db.Products.AsNoTracking().FirstOrDefault(i => i.Id == productVM.Product.Id);
 
                     if (images.Count > 0) // if a new photo was added
                     {
@@ -104,7 +104,7 @@ namespace MyStore.Controllers
                         string imageExtention = Path.GetExtension(images[0].FileName);
                         string fullImageName = imageName + imageExtention;
 
-                        var oldImagePath = Path.Combine(uploadPath, objFromDbToEdit.Image);
+                        var oldImagePath = Path.Combine(uploadPath, objFromDb.Image);
 
                         if (System.IO.File.Exists(oldImagePath))
                         {
@@ -120,7 +120,7 @@ namespace MyStore.Controllers
                     }
                     else
                     {
-                        productVM.Product.Image = objFromDbToEdit.Image;
+                        productVM.Product.Image = objFromDb.Image;
                     }
 
                     _db.Products.Update(productVM.Product);
@@ -129,12 +129,19 @@ namespace MyStore.Controllers
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            //productVM.DropDownCategoriesList = _db.Categories.Select(c =>
-            //    new SelectListItem
-            //    {
-            //        Text = c.Name,
-            //        Value = c.Id.ToString()
-            //    });
+
+            productVM.DropDownCategories = _db.Categories.Select(c =>
+                new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString()
+                });
+            productVM.DropDownManufacturers = _db.Manufacturers.Select(c =>
+                new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString()
+                });
 
             return View(productVM);
         }
@@ -147,7 +154,7 @@ namespace MyStore.Controllers
                 return NotFound();
             }
 
-            var product = _db.Products.Include(i => i.Category).FirstOrDefault(i => i.Id == id);
+            var product = _db.Products.Include(i => i.Category).Include(i => i.Manufacturer).FirstOrDefault(i => i.Id == id);
 
             if (product is null)
             {

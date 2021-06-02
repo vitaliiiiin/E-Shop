@@ -36,6 +36,15 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
+                        <label asp-for="Product.ShortDescript"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Product.ShortDescript" class="form-control" />
+                        <span asp-validation-for="Product.ShortDescript" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
                         <label asp-for="Product.Description"></label>
                     </div>
                     <div class="col-8">
@@ -50,7 +59,7 @@
                     <div class="col-8">
                         @if (Model.Product.Id != 0)
                         {
-                            <img src="@WebConstants.ImagePath@Model.Product.Image" width="100%" style="border-radius:5px; border: 1px solid #bbb"/>
+                            <img src="@WebConstants.ImagePath@Model.Product.Image" width="100%" style="border-radius:5px; border: 1px solid #bbb" />
                         }
                         <input type="file" name="files" id="uploadImg" multiple class="form-control" />
                     </div>
