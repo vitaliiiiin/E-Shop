@@ -1,4 +1,5 @@
 ﻿@model MyStore.Models.Product
+@using System.Globalization
 
 <form method="post" enctype="multipart/form-data">
     <input asp-for="Id" hidden />
@@ -13,7 +14,7 @@
                         <label asp-for="Name"></label>
                     </div>
                     <div class="col-8">
-                        <input asp-for="Name" class="form-control" />
+                        <input asp-for="Name" class="form-control" disabled/>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -21,7 +22,16 @@
                         <label asp-for="Price"></label>
                     </div>
                     <div class="col-8">
-                        <input asp-for="Price" class="form-control" disabled />
+                        <input class="form-control" 
+                               value="@Model.Price.ToString("C0", new CultureInfo("uk-UA"))" disabled>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>Short Description</label>
+                    </div>
+                    <div class="col-8">
+                        <textarea asp-for="ShortDescript" class="form-control" disabled></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -29,7 +39,7 @@
                         <label asp-for="Description"></label>
                     </div>
                     <div class="col-8">
-                        <textarea asp-for="Description" id="summernote" class="form-control"></textarea>
+                        <div class="form-control bg-light" >@Html.Raw(Model.Description)</div>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -42,7 +52,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="Category.Id"></label>
+                        <label>Category</label>
                     </div>
                     <div class="col-8">
                         <input asp-for="Category.Name" class="form-control" disabled />
@@ -50,7 +60,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="Manufacturer.Id"></label>
+                        <label>Manufacturer</label>
                     </div>
                     <div class="col-8">
                         <input asp-for="Manufacturer.Name" class="form-control" disabled />
@@ -70,14 +80,3 @@
         </div>
     </div>
 </form>
-
-@section Scripts {
-<script>
-    $(document).ready(function () {
-        $('.summernote').summernote({
-            height: 250,
-            disable: true
-        });
-    });
-</script>
-}
