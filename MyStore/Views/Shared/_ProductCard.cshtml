@@ -1,10 +1,11 @@
 ﻿@model MyStore.Models.Product
+@using System.Globalization
 
-<div class="col-lg-4 col-md-6 pb-4">
+<div class="col-lg-4 col-md-6 pb-4 filter @Model.Category.Name.Replace(' ', '_')">
     <div class="card card-cascade card-ecommerce wider shadow mb-5 ">
         <!--Card image-->
         <div class="view view-cascade overlay text-center">
-            <img class="card-img-top" src="@WebConstants.ImagePath@Model.Image" alt="@Model.Name's photo">
+            <img class="card-img-top img-fluid d-block mx-auto mb-3" src="@WebConstants.ImagePath@Model.Image" alt="@Model.Name's photo">
             <a>
                 <div class="mask rgba-white-slight"></div>
             </a>
@@ -17,11 +18,10 @@
             </h4>
             <!-- Card Description-->
             <p class="card-text">@Model.ShortDescript</p>
-            <p class="text-info h5">@Model.Price ₴</p>
-
+            <p class="text-info h5">@Model.Price.ToString("C0", new CultureInfo("uk-UA"))</p>
             <div class="col-12 p-1">
                 <button type="button" class="btn btn-success">Add to Cart</button>
-                <button type="button" class="btn btn-info">View Details</button>
+                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info">View Details</a>
             </div>
         </div>
         <div class="card-body px-3 row">
