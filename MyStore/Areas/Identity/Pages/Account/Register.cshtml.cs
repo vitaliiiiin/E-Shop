@@ -122,12 +122,17 @@ namespace MyStore.Areas.Identity.Pages.Account
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
-                    else
+                    
+                    if (!User.IsInRole(WebConstants.AdminRole))
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
+                            
                         return LocalRedirect(returnUrl);
                     }
+
+                    return RedirectToAction(nameof(Index));
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
