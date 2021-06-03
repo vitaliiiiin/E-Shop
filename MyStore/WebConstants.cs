@@ -7,10 +7,12 @@ namespace MyStore
 {
     public static class WebConstants
     {
-        public static string ImagePath { get; } = @"\images\product\";
-        public static string SessionCart { get; } = "ShoppingCartSession";
+        public const string ImagePath = @"\images\product\";
+        public const string SessionCart = "ShoppingCartSession";
 
-        public static string AdminRole { get; } = "Admin";
-        public static string CustomerRole { get; } = "Customer";
+        public const string AdminRole = "Admin";
+        public const string CustomerRole = "Customer";
+
+        public const string EmailAdmin = "nesterenkov90@gmail.com";
     }
 }
