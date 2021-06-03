@@ -27,21 +27,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (User.IsInRole(WebConstants.AdminRole))
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Content Management
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Manufacturer" asp-action="Index">Manufacturers</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Add new Admin</a>
-                                </div>
-                            </li>
-                        }
                         <li>
                             <a asp-action="Index" asp-controller="Cart" class="nav-link active">
                                 @{
@@ -51,6 +36,22 @@
                                 Your Cart (@count)
                             </a>
                         </li>
+                        @if (User.IsInRole(WebConstants.AdminRole))
+                        {
+                            <li class="nav-item dropdown ml-5">
+                                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Content Management
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Manufacturer" asp-action="Index">Manufacturers</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Add new Admin</a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
