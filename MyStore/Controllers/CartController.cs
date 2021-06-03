@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyStore.Data;
 using MyStore.Models;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace MyStore.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -34,6 +36,23 @@ namespace MyStore.Controllers
             var prodList = _db.Products.Where(i => prodInCart.Contains(i.Id));
 
             return View(prodList);
+        }
+
+        public IActionResult RemoveFromCart(int id)
+        {
+            var shoppingCartList = new List<ShoppingCart>();
+
+            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstants.SessionCart) != null
+               && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstants.SessionCart).Count() > 0)
+            {
+                // session exists
+                shoppingCartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstants.SessionCart);
+            }
+
+            shoppingCartList.Remove(shoppingCartList.FirstOrDefault(i => i.ProductId == id));
+            HttpContext.Session.Set(WebConstants.SessionCart, shoppingCartList);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
