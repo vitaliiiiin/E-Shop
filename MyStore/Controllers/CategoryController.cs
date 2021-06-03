@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MyStore.Data;
 using MyStore.Models;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace MyStore.Controllers
 {
+    [Authorize(Roles = WebConstants.AdminRole)]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _db;

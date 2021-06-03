@@ -12,9 +12,12 @@
                             <i class="fa fa-shopping-cart"></i> &nbsp;
                             Shopping Cart
                         </div>
-                        <div class="col-6 text-right">
-                            <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info btn-sm">Continue Shopping</a>
-                        </div>
+                        @if (Model.Count() > 0)
+                        {
+                            <div class="col-6 text-right">
+                                <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info btn-sm">Continue Shopping</a>
+                            </div>
+                        }
                     </div>
                     <div class="card-body">
                         <div class=" d-none d-lg-block">
@@ -32,34 +35,49 @@
                             </div>
                         </div>
                         <hr />
+                        @if (Model.Count() > 0)
+                        {
+                            @foreach (var product in Model)
+                            {
+                                <div class="row h-100">
+                                    <div class="col-4 col-md-2 text-center py-2">
+                                        <img src="@WebConstants.ImagePath@product.Image" class="rounded" width="100%" />
+                                    </div>
+                                    <div class="col-8 col-lg-7">
+                                        <h5>@product.Name</h5>
+                                        <div style="font-size:11px;">@product.ShortDescript</div>
+                                    </div>
+                                    <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
+                                        <span style="font-size:17px;">@product.Price.ToString("C0", new CultureInfo("uk-UA"))</span>
 
-                    @foreach (var product in Model)
-                    {
-                        <div class="row h-100">
-                            <div class="col-4 col-md-2 text-center py-2">
-                                <img src="@WebConstants.ImagePath@product.Image" class="rounded" width="100%" />
-                            </div>
-                            <div class="col-8 col-lg-7">
-                                <h5>@product.Name</h5>
-                                <div style="font-size:11px;">@product.ShortDescript</div>
-                            </div>
-                            <div class="col-3 col-lg-2 pt-lg-4" style="font-size:11px;">
-                                <span style="font-size:17px;">@product.Price.ToString("C0", new CultureInfo("uk-UA"))</span>
-
-                            </div>
-                            <div class="col-3 col-lg-1 p-0 pt-lg-3 text-center">
-                                <a asp-action="RemoveFromCart" asp-route-id="@product.Id" class="btn btn-outline-danger">Remove</a>
-                            </div>
-                        </div>
-                        <hr />
-                    }
+                                    </div>
+                                    <div class="col-3 col-lg-1 p-0 pt-lg-3 text-center">
+                                        <a asp-action="RemoveFromCart" asp-route-id="@product.Id" class="btn btn-outline-danger">Remove</a>
+                                    </div>
+                                </div>
+                                <hr />
+                            }
+                        }
+                        else
+                        {
+                            <h2 class="text-center">Oooops... It's empty here</h2>
+                        }
                     </div>
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-6 col-md-3 offset-md-9">
-                                <button type="submit" class="btn btn-success form-control ">
-                                    <span>Continue</span>
-                                </button>
+                                @if (Model.Count() > 0)
+                                {
+                                    <button type="submit" class="btn btn-success form-control ">
+                                        <span>Continue</span>
+                                    </button>
+                                }
+                                else
+                                {
+                                    <div class="col-6 text-right">
+                                        <a asp-action="Index" asp-controller="Home" class="btn btn-outline-info btn-sm">Continue Shopping</a>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>

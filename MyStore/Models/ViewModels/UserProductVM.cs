@@ -8,6 +8,6 @@ namespace MyStore.Models.ViewModels
     public class UserProductVM
     {
         public ApplicationUser ApplicationUser { get; set; }
-        public IEnumerable<Product> ProductList { get; set; } = new List<Product>();
+        public IList<Product> ProductList { get; set; } = new List<Product>();
     }
 }
