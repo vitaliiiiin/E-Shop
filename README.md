@@ -1,4 +1,4 @@
-# MyStore
+# MyStore (CHI Software Technical Task Assignment)
 Hello there!
 I've been douing this for really long time :)
 
@@ -22,3 +22,5 @@ You can get it when you connect to DB in Ms SQL Server Management Studio.
   <br />
   If it's okay, go ahead and run ```DataForDb.sql```.
   It just addes examples to DataBase, so you don't need to do it by yourself.
+
+P.S. If you have any troubles, you can contact me via Telegram (```@vitaliiiiin```) :))
