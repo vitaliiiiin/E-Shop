@@ -40,13 +40,7 @@ namespace MyStore
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddDistributedMemoryCache();
-            services.AddHttpContextAccessor();
-
-            services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-            });
+            
             services.AddControllersWithViews();
         }
 
@@ -71,8 +65,6 @@ namespace MyStore
             app.UseAuthentication();
 
             app.UseAuthorization();
-
-            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
