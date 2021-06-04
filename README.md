@@ -23,4 +23,14 @@ You can get it when you connect to DB in Ms SQL Server Management Studio.
   If it's okay, go ahead and run ```DataForDb.sql```.
   It just addes examples to DataBase, so you don't need to do it by yourself.
 
+**Some important information about my project features**
+
+**1.** First your registered account becomes admin-account, so you have the following capabilities:
+   - you can manage Categories (e.g. add new one, delete one or rename one)
+   - you can manage Manufacturers as well (e.g. add new one, delete one or rename one)
+   - you can manage Products (e.g. rename one, change its price, its description, its category and manufacturer)
+   - you can add new admin
+**2.** When you done your order, you will **recive an email** with order details, so please enter real email (e.g. temp-mail)
+All the other features you will see in the projects :)
+
 P.S. If you have any troubles, you can contact me via Telegram (```@vitaliiiiin```) :))
