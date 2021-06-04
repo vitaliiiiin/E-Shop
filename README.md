@@ -1,6 +1,6 @@
 # MyStore (CHI Software Technical Assignment)
 Hello there!
-I've been doing this for really long time :)
+I've done my best for this technical assignment :)
 
 So, This is an instruction on how to prepare the project for work.
 <br />
