@@ -1,4 +1,4 @@
-# MyStore (CHI Software Technical Task Assignment)
+# MyStore (CHI Software Technical Assignment)
 Hello there!
 I've been doing this for really long time :)
 
