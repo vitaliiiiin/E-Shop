@@ -28,12 +28,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li>
-                            <a asp-action="Index" asp-controller="Cart" class="nav-link active">
+                            <a asp-action="Index" asp-controller="ShoppingCart" class="nav-link active">
                                 @{
-                                    var count = httpContextAccessor.HttpContext.Session
-                                        .Get<List<ShoppingCart>>(WebConstants.SessionCart)?.Count ?? 0;
+//var count = 
+//httpContextAccessor.HttpContext.Session
+//.Get<List<ShoppingCart>>(WebConstants.SessionCart)?.Count ?? 0;
                                 }
-                                Your Cart (@count)
+                                Your Cart @*(@count)*@
                             </a>
                         </li>
                         @if (User.IsInRole(WebConstants.AdminRole))
