@@ -100,9 +100,13 @@ namespace MyStore.Areas.Identity.Pages.Account
                     {
                         await _userManager.AddToRoleAsync(user, WebConstants.AdminRole);
                     }
-                    else
+                    else if (_userManager.Users.Count() > 0)
                     {
                         await _userManager.AddToRoleAsync(user, WebConstants.CustomerRole);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, WebConstants.AdminRole);
                     }
 
                     _logger.LogInformation("User created a new account with password.");
