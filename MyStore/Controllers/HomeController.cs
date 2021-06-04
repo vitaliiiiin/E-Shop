@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -10,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MyStore.Controllers
@@ -39,64 +41,54 @@ namespace MyStore.Controllers
         // GET
         public IActionResult Details(int id)
         {
-            var shoppingCartList = new List<ShoppingCart>();
-
-            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstants.SessionCart) != null
-                && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstants.SessionCart).Count() > 0)
-            {
-                shoppingCartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstants.SessionCart);
-            }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            // if userId is null so user is not logged in
+            // it will says 'add to cart' in order to make
+            // user register his account
 
             var detailsVM = new DetailsVM()
             {
                 Product = _db.Products.Include(i => i.Category).Include(i => i.Manufacturer)
                 .FirstOrDefault(i => i.Id == id),
-                IsInCart = shoppingCartList.Any(i => i.ProductId == id)
+                IsInCart = _db.ShoppingCart.Any(i => i.UserId == userId && i.ProductId == id)
             };
 
             return View(detailsVM);
         }
 
-        // POST - add/remove from shopping cart
+        // POST - add to shopping cart
+        [Authorize]
         [HttpPost, ActionName("Details")]
         public IActionResult DetailsPost(int id)
         {
-            var shoppingCartList = new List<ShoppingCart>();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var productToAdd = _db.Products.FirstOrDefault(i => i.Id == id);
 
-            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstants.SessionCart) != null
-                && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstants.SessionCart).Count() > 0)
+            var itemToAdd = new ShoppingCart
             {
-                shoppingCartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstants.SessionCart);
+                UserId = userId,
+                ProductId = productToAdd.Id
+            };
+
+            if (!_db.ShoppingCart.Contains(itemToAdd))
+            {
+                _db.ShoppingCart.Add(itemToAdd);
+                _db.SaveChanges();
             }
-
-            shoppingCartList.Add(new ShoppingCart
-            {
-                ProductId = id
-            });
-
-            HttpContext.Session.Set(WebConstants.SessionCart, shoppingCartList);
 
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult RemoveFromCart(int id)
         {
-            var shoppingCartList = new List<ShoppingCart>();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var productToRemove = _db.ShoppingCart.FirstOrDefault(i => i.UserId == userId && i.ProductId == id);
 
-            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstants.SessionCart) != null
-                && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstants.SessionCart).Count() > 0)
+            if (productToRemove != null)
             {
-                shoppingCartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstants.SessionCart);
+                _db.ShoppingCart.Remove(productToRemove);
             }
-
-            var itemToRemove = shoppingCartList.SingleOrDefault(i => i.ProductId == id);
-
-            if (itemToRemove != null)
-            {
-                shoppingCartList.Remove(itemToRemove);
-            }
-
-            HttpContext.Session.Set(WebConstants.SessionCart, shoppingCartList);
+            _db.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }

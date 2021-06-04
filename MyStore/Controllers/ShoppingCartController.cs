@@ -23,10 +23,14 @@ namespace MyStore.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IEmailSender _emailSender;
 
-        public ShoppingCartController(ApplicationDbContext db)
+        public ShoppingCartController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment, IEmailSender emailSender)
         {
             _db = db;
+            _webHostEnvironment = webHostEnvironment;
+            _emailSender = emailSender;
         }
 
         // GET
@@ -81,6 +85,68 @@ namespace MyStore.Controllers
             };
 
             return View(userProductVM);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Summary")]
+        public async Task<IActionResult> SummaryPost(UserProductVM userProductVM)
+        {
+            var pathToAdminLetter = _webHostEnvironment.WebRootPath + "/templates/newOrderToAdmin.html";
+
+            var adminLetterSubject = "New Inquiry";
+            string adminLetterHtmlBody = string.Empty;
+            using (StreamReader sr = System.IO.File.OpenText(pathToAdminLetter))
+            {
+                adminLetterHtmlBody = sr.ReadToEnd();
+            }
+            //Name: {0}
+            //Email: {1}
+            //Phone: {2}
+            //Products: {3}
+
+            var productListSB = new StringBuilder();
+            foreach (var prod in userProductVM.ProductList)
+            {
+                productListSB.Append($" - { prod.Name} <span style='font-size:14px;'> (ID: {prod.Id})</span><br />");
+            }
+
+            string adminMessageBody = string.Format(adminLetterHtmlBody,
+                userProductVM.ApplicationUser.FullName,
+                userProductVM.ApplicationUser.Email,
+                userProductVM.ApplicationUser.PhoneNumber,
+                productListSB.ToString());
+
+            await _emailSender.SendEmailAsync(WebConstants.EmailAdmin, adminLetterSubject, adminMessageBody);
+
+
+            var pathToCustomerLetter = _webHostEnvironment.WebRootPath + "/templates/orderInfoToCustomer.html";
+
+            var customerLetterSubject = "Order Details";
+            string customerLetterHtmlBody = string.Empty;
+            using (StreamReader sr = System.IO.File.OpenText(pathToCustomerLetter))
+            {
+                adminLetterHtmlBody = sr.ReadToEnd();
+            }
+            //Name: {0}
+            //Phone: {1}
+            //Products: {2}
+
+            string customerMessageBody = string.Format(adminLetterHtmlBody,
+                userProductVM.ApplicationUser.FullName,
+                userProductVM.ApplicationUser.PhoneNumber,
+                productListSB.ToString());
+
+            await _emailSender.SendEmailAsync(userProductVM.ApplicationUser.Email, customerLetterSubject, customerMessageBody);
+
+            return RedirectToAction(nameof(OrderConfirmation));
+        }
+
+        public IActionResult OrderConfirmation()
+        {
+            HttpContext.Session.Clear();
+
+            return View();
         }
     }
 }

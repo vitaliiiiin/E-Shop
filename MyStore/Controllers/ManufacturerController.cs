@@ -21,8 +21,9 @@ namespace MyStore.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Manufacturer> objList = _db.Manufacturers;
-            return View(objList);
+            IEnumerable<Manufacturer> manufacturerList = _db.Manufacturers;
+
+            return View(manufacturerList);
         }
 
         // GET - CREATE
