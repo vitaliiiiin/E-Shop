@@ -94,15 +94,18 @@ namespace MyStore.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            // Add Order To DB
             foreach (var product in userProductVM.ProductList)
             {
+                // Add Order To History
                 _db.OrderHistory.Add(new OrderHistory
                 {
                     UserId = userId,
                     ProductId = product.Id,
                     OrderDateTime = DateTime.Now
                 });
+
+                // Romove Products from Cart
+                _db.ShoppingCart.Remove(_db.ShoppingCart.Single(i => i.UserId == userId && i.ProductId == product.Id));
             }
             _db.SaveChanges();
 
