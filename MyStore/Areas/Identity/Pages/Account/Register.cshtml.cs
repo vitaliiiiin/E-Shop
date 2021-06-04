@@ -100,7 +100,7 @@ namespace MyStore.Areas.Identity.Pages.Account
                     {
                         await _userManager.AddToRoleAsync(user, WebConstants.AdminRole);
                     }
-                    else if (_userManager.Users.Count() > 0)
+                    else if (_userManager.Users.Count() > 1) // first registered user becomes admin
                     {
                         await _userManager.AddToRoleAsync(user, WebConstants.CustomerRole);
                     }
