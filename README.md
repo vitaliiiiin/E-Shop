@@ -2,7 +2,7 @@
 Hello there!
 I've done my best for this technical assignment :)
 
-So, This is an instruction on how to prepare the project for work.
+So, this is an instruction on how to prepare the project for work.
 <br />
   **1.** Open project, go to ```MyStore/appsettings.json```.
 ```json
