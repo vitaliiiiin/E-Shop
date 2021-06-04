@@ -42,6 +42,20 @@ namespace MyStore.Controllers
             return View(productList);
         }
 
+        public IActionResult RemoveFromCart(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var productToRemove = _db.ShoppingCart.FirstOrDefault(i => i.UserId == userId && i.ProductId == id);
+
+            if (productToRemove != null)
+            {
+                _db.ShoppingCart.Remove(productToRemove);
+            }
+            _db.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName(nameof(Index))]
@@ -55,20 +69,18 @@ namespace MyStore.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            IEnumerable<Product> productList =
+            var productList =
                 _db.ShoppingCart.Include(i => i.Product)
                 .Where(i => i.UserId == userId)
-                .Select(i => i.Product);
+                .Select(i => i.Product).ToList();
 
-            return View(productList);
+            UserProductVM userProductVM = new UserProductVM
+            {
+                ApplicationUser = _db.ApplicationUsers.FirstOrDefault(i => i.Id == userId),
+                ProductList = productList
+            };
 
-            //UserProductVM userProductVM = new UserProductVM
-            //{
-            //    ApplicationUser = _db.ApplicationUsers.FirstOrDefault(i => i.Id == userId),
-            //    ProductList = productList.ToList()
-            //};
-
-            //return View(userProductVM);
+            return View(userProductVM);
         }
     }
 }
