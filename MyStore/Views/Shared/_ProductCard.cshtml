@@ -20,8 +20,7 @@
             <p class="card-text">@Model.ShortDescript</p>
             <p class="text-info h5">@Model.Price.ToString("C0", new CultureInfo("uk-UA"))</p>
             <div class="col-12 p-1">
-                <button type="button" class="btn btn-success">Add to Cart</button>
-                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info">View Details</a>
+                <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-success">View Details</a>
             </div>
         </div>
         <div class="card-body px-3 row">
