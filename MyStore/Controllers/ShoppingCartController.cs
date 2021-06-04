@@ -92,9 +92,24 @@ namespace MyStore.Controllers
         [ActionName("Summary")]
         public async Task<IActionResult> SummaryPost(UserProductVM userProductVM)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Add Order To DB
+            foreach (var product in userProductVM.ProductList)
+            {
+                _db.OrderHistory.Add(new OrderHistory
+                {
+                    UserId = userId,
+                    ProductId = product.Id,
+                    OrderDateTime = DateTime.Now
+                });
+            }
+            _db.SaveChanges();
+
+            // Send Order Info To Admin's Email
             var pathToAdminLetter = _webHostEnvironment.WebRootPath + "/templates/newOrderToAdmin.html";
 
-            var adminLetterSubject = "New Inquiry";
+            var adminLetterSubject = "New Order";
             string adminLetterHtmlBody = string.Empty;
             using (StreamReader sr = System.IO.File.OpenText(pathToAdminLetter))
             {
@@ -119,7 +134,7 @@ namespace MyStore.Controllers
 
             await _emailSender.SendEmailAsync(WebConstants.EmailAdmin, adminLetterSubject, adminMessageBody);
 
-
+            // Send Order Info To Customer's Email
             var pathToCustomerLetter = _webHostEnvironment.WebRootPath + "/templates/orderInfoToCustomer.html";
 
             var customerLetterSubject = "Order Details";
@@ -144,8 +159,6 @@ namespace MyStore.Controllers
 
         public IActionResult OrderConfirmation()
         {
-            HttpContext.Session.Clear();
-
             return View();
         }
     }

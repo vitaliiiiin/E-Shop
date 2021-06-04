@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 
 namespace MyStore.Models.ViewModels
 {
-    public class UserProductVM
+    public class OrderHistoryVM
     {
         public ApplicationUser ApplicationUser { get; set; }
-        public IList<Product> ProductList { get; set; } = new List<Product>();
+
+        public List<KeyValuePair<Product, DateTime>> ProductDateTimePairList { get; set; } = 
+            new List<KeyValuePair<Product, DateTime>>();
+
     }
 }

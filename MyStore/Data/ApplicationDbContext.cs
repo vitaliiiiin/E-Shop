@@ -18,5 +18,6 @@ namespace MyStore.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
+        public DbSet<OrderHistory> OrderHistory { get; set; }
     }
 }

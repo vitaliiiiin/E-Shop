@@ -9,6 +9,7 @@
                 @obj.Name
             </button>
         }
+        <button data-></button>
         <br />
         <br />
         <br />
@@ -34,8 +35,8 @@ $(".filter-button").click(function(){
     }
     else
     {
-        $(".filter").not('.'+value).hide();
-        $('.filter').filter('.'+value).show();
+        $(".filter").not('.'+value).hide('1000');
+        $('.filter').filter('.'+value).show('1000');
 
     }
 });
