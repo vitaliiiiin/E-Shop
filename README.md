@@ -10,12 +10,13 @@ So, This is an instruction on how to prepare the project for work.
     "DefaultConnection": "Server=VITALII_N;Database=MyStore;Trusted_Connection=True;MultipleActiveResultSets=True"
   }
 ```
-Change ```Server=VITALII_N``` in such way that instead of ```VITALII_N``` there should be your Server name.
+Change ```Server=VITALII_N``` in such way that instead of ```VITALII_N``` there would be your Server name.
+It should be like ```Server=YOUR_SERVER_NAME```.
 You can get it when you connect to DB in Ms SQL Server Management Studio.
 
   **2.** When Connection string is done, write ```Update-Database``` in Package Manager Console.
   <br />
-  **3.** Open ```DataForDb.sql``` file in main directory. It's right behind ```MyStore.sln```
+  **3.** Open ```DataForDb.sql``` file in main directory. It's right behind ```MyStore.sln```.
   <br />
   It is opened in Ms SQL Serrver Management Studio.
   Before run this query, make sure you **don't have** a database with **the same name** ```MyStore```.
@@ -32,7 +33,8 @@ You can get it when you connect to DB in Ms SQL Server Management Studio.
    - you can add a new admin
 <br />
 
-**2.** When you done your order, you will **recive an email** with order details, so please enter real email (or temp-mail if you don't wanna use your personal one)
+**2.** When you done your order, you will **recieve an email** with order details, so please enter real email 
+(or temp-mail if you don't wanna use your personal one).
 <br />
 All the other features you will see in the project :)
 
