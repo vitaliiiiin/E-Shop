@@ -38,4 +38,4 @@ You can get it when you connect to DB in Ms SQL Server Management Studio.
 <br />
 All the other features you will see in the project :)
 
-P.S. If you have any troubles, you ask me via Telegram (```@vitaliiiiin```) :)
+P.S. If you have any troubles with this project, you ask me via Telegram (```@vitaliiiiin```) :)
