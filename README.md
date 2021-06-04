@@ -30,6 +30,8 @@ You can get it when you connect to DB in Ms SQL Server Management Studio.
    - you can manage Manufacturers as well (e.g. add new one, delete one or rename one)
    - you can manage Products (e.g. rename one, change its price, its description, its category and manufacturer)
    - you can add new admin
+<br />
+
 **2.** When you done your order, you will **recive an email** with order details, so please enter real email (e.g. temp-mail)
 All the other features you will see in the projects :)
 
