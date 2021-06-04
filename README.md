@@ -2,8 +2,9 @@
 Hello there!
 I've done my best for this technical assignment :)
 
-So, this is an instruction on how to prepare the project for work.
+So, this is an instruction on how to prepare the project for work:
 <br />
+
   **1.** Open project, go to ```MyStore/appsettings.json```.
 ```json
 "ConnectionStrings": {
@@ -15,13 +16,17 @@ It should be like ```Server=YOUR_SERVER_NAME```.
 You can get it when you connect to DB in Ms SQL Server Management Studio.
 
   **2.** When Connection string is done, write ```Update-Database``` in Package Manager Console.
+  
+  But before run this command, make sure you **don't have** a database with **the same** ```MyStore``` name.
   <br />
+  If you have, rename it or delete it.
+  <br />
+  If everything's okay, go ahead and run ```Update-Database``` command.
+  <br />
+  
   **3.** Open ```DataForDb.sql``` file in main directory. It's right behind ```MyStore.sln```.
   <br />
   It is opened in Ms SQL Serrver Management Studio.
-  Before run this query, make sure you **don't have** a database with **the same name** ```MyStore```.
-  <br />
-  If it's okay, go ahead and run ```DataForDb.sql```.
   It just adds examples to DataBase, so you don't need to do it by yourself.
 
 **Some information about my project's features**
