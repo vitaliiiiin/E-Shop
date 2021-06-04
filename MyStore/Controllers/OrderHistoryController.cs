@@ -34,6 +34,7 @@ namespace MyStore.Controllers
             
             orderHistoryVM.ProductDateTimePairList = _db.OrderHistory
                 .Include(i => i.Product)
+                .Where(i => i.UserId == userId)
                 .Select(i => new KeyValuePair<Product, DateTime>(i.Product, i.OrderDateTime)).ToList()
                 .OrderBy(i => i.Value).ToList();
 
