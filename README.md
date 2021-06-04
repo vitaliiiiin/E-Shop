@@ -4,7 +4,7 @@ I've been doing this for really long time :)
 
 So, This is an instruction on how to prepare the project for work.
 <br />
-  **1.** Open project, go to ```MyStore/appsettings.json```
+  **1.** Open project, go to ```MyStore/appsettings.json```.
 ```json
 "ConnectionStrings": {
     "DefaultConnection": "Server=VITALII_N;Database=MyStore;Trusted_Connection=True;MultipleActiveResultSets=True"
