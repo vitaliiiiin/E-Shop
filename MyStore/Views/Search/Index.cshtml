@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Product>
+
+<br /><br />
+@using (Html.BeginForm("Index", "Search", FormMethod.Get))
+{
+    @Html.TextBox("searching")<input type="submit" value="Search" />
+}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Product Id
+            </th>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Manufacturer
+            </th>
+            <th>
+                Category
+            </th>
+        </tr>
+    </thead>
+    @if (Model.Count() > 0)
+    {
+        foreach (var product in Model)
+        {
+        <tr>
+            <td>
+                @product.Id
+            </td>
+            <td>
+                <a asp-controller="Home" asp-action="Details" asp-route-id="@product.Id">@product.Name</a>
+            </td>
+            <td>
+                @product.Manufacturer.Name
+            </td>
+            <td>
+                @product.Category.Name 
+            </td>
+        </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td>
+                Oooops... It`s empty here
+            </td>
+        </tr>
+    }
+</table>
