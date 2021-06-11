@@ -8,11 +8,10 @@ So, this is an instruction on how to prepare the project for work:
   **1.** Open project, go to ```MyStore/appsettings.json```.
 ```json
 "ConnectionStrings": {
-    "DefaultConnection": "Server=VITALII_N;Database=MyStore;Trusted_Connection=True;MultipleActiveResultSets=True"
+    "DefaultConnection": "Server=YOUR_SERVER_HERE;Database=MyStore;Trusted_Connection=True;MultipleActiveResultSets=True"
   }
 ```
-Change ```Server=VITALII_N``` in such way that instead of ```VITALII_N``` there would be your Server name.
-It should be like ```Server=YOUR_SERVER_NAME```.
+Change ```Server=YOUR_SERVER_HERE``` in such way that instead of ```YOUR_SERVER_HERE``` there would be your Server name.
 You can get it when you connect to DB in Ms SQL Server Management Studio.
 
   **2.** When Connection string is done, write ```Update-Database``` in Package Manager Console.
