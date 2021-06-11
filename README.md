@@ -1,38 +1,54 @@
-# MyStore (CHI Software Technical Task Assignment)
+# MyStore (CHI Software Technical Assignment)
 Hello there!
-I've been douing this for really long time :)
+I've done my best for this technical assignment :)
 
-So, This is an instruction on how to prepare a project for work.
+So, this is an instruction on how to prepare the project for work:
 <br />
-  **1.** Open project, go to ```MyStore/appsettings.json```
+
+  **1.** Open project, go to ```MyStore/appsettings.json```.
 ```json
 "ConnectionStrings": {
-    "DefaultConnection": "Server=VITALII_N;Database=MyStore;Trusted_Connection=True;MultipleActiveResultSets=True"
+    "DefaultConnection": "Server=YOUR_SERVER_HERE;Database=MyStore;Trusted_Connection=True;MultipleActiveResultSets=True"
   }
 ```
-Change ```Server=VITALII_N``` in such way that instead of ```VITALII_N``` there should be your Server name.
+Change ```Server=YOUR_SERVER_HERE``` in such way that instead of ```YOUR_SERVER_HERE``` there would be your Server name.
 You can get it when you connect to DB in Ms SQL Server Management Studio.
 
+```
+"MailJet": {
+    "ApiKey": "8078b8d5603638751a604e929ddfe5b5",
+    "SecretKey": "SECRET_KEY_HERE"
+  }
+```
+Change ```"SecretKey": "SECRET_KEY_HERE"``` in such way that instead of ```SECRET_KEY_HERE``` there should be **the secret key I've sent** with this technical assingnment.
+Example: ```"SecretKey":"8078b8d5603638751a604e929ddfe5b5"``` (don't use this key, it's just an example).
+
   **2.** When Connection string is done, write ```Update-Database``` in Package Manager Console.
+  
+  But before run this command, make sure you **don't have** a database with **the same** ```MyStore``` name.
   <br />
-  **3.** Open ```DataForDb.sql``` file in main directory. It's right behind ```MyStore.sln```
+  If you have, rename it or delete it.
   <br />
-  It opens in Ms SQL Serrver Management Studio.
-  Before run this query, make sure you **don't have** a database with the same name ```MyStore```.
+  If everything's okay, go ahead and run ```Update-Database``` command.
   <br />
-  If it's okay, go ahead and run ```DataForDb.sql```.
-  It just addes examples to DataBase, so you don't need to do it by yourself.
+  
+  **3.** Open ```DataForDb.sql``` file in main directory. It's right behind ```MyStore.sln```.
+  <br />
+  It is opened in Ms SQL Serrver Management Studio.
+  It just adds examples to DataBase, so you don't need to do it by yourself.
 
-**Some important information about my project features**
+**Some information about my project's features**
 
-**1.** First your registered account becomes admin-account, so you have the following capabilities:
+**1.** First registered account becomes admin-account, so you have the following permissions:
    - you can manage Categories (e.g. add new one, delete one or rename one)
    - you can manage Manufacturers as well (e.g. add new one, delete one or rename one)
-   - you can manage Products (e.g. rename one, change its price, its description, its category and manufacturer)
-   - you can add new admin
+   - you can manage Products (e.g. rename one, change its price, its description, its category and its manufacturer)
+   - you can add a new admin
 <br />
 
-**2.** When you done your order, you will **recive an email** with order details, so please enter real email (e.g. temp-mail)
-All the other features you will see in the projects :)
+**2.** When you done your order, you will **recieve an email** with order details, so please enter real email 
+(or temp-mail if you don't wanna use your personal one).
+<br />
+All the other features you will see in the project :)
 
-P.S. If you have any troubles, you can contact me via Telegram (```@vitaliiiiin```) :))
+P.S. If you have any troubles with this project, you can ask me via Telegram (```@vitaliiiiin```) :)
