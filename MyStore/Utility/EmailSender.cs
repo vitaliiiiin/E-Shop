@@ -42,7 +42,7 @@ namespace MyStore.Utility
                   {
                    "From",
                    new JObject {
-                    {"Email", "nesterenkov90@gmail.com"},
+                    {"Email", "nesterenkov90@protonmail.com"},
                     {"Name", "Vitalii"}
                    }
                   }, {
