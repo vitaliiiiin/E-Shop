@@ -14,6 +14,15 @@ So, this is an instruction on how to prepare the project for work:
 Change ```Server=YOUR_SERVER_HERE``` in such way that instead of ```YOUR_SERVER_HERE``` there would be your Server name.
 You can get it when you connect to DB in Ms SQL Server Management Studio.
 
+```
+"MailJet": {
+    "ApiKey": "8078b8d5603638751a604e929ddfe5b5",
+    "SecretKey": "SECRET_KEY_HERE"
+  }
+```
+Change ```"SecretKey": "SECRET_KEY_HERE"``` in such way that instead of ```SECRET_KEY_HERE``` there should be **the secret key I've sent** with this technical assingnment.
+Example: ```"SecretKey":"8078b8d5603638751a604e929ddfe5b5"``` (don't use this key, it's just an example).
+
   **2.** When Connection string is done, write ```Update-Database``` in Package Manager Console.
   
   But before run this command, make sure you **don't have** a database with **the same** ```MyStore``` name.
