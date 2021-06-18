@@ -1,8 +1,22 @@
-# MyStore (CHI Software Technical Assignment)
-Hello there!
-I've done my best for this technical assignment :)
+# E-Shop
+Hello there! I'm Vitaliii Nesternko and this is my pet project.
 
-So, this is an instruction on how to prepare the project for work:
+
+**Some information about my project's features**
+
+**1.** First registered account becomes admin-account, so you have the following permissions:
+   - you can manage Categories (e.g. add new one, delete one or rename one)
+   - you can manage Manufacturers as well (e.g. add new one, delete one or rename one)
+   - you can manage Products (e.g. rename one, change its price, its description, its category and its manufacturer)
+   - you can add a new admin
+<br />
+
+**2.** When you done your order, you will **recieve an email** with order details, so please enter real email 
+(or temp-mail if you don't wanna use your personal one).
+<br />
+All the other features you will see in the project :)
+
+Got it interesring? This is an instruction on how to prepare the project for work:
 <br />
 
   **1.** Open project, go to ```MyStore/appsettings.json```.
@@ -14,13 +28,15 @@ So, this is an instruction on how to prepare the project for work:
 Change ```Server=YOUR_SERVER_HERE``` in such way that instead of ```YOUR_SERVER_HERE``` there would be your Server name.
 You can get it when you connect to DB in Ms SQL Server Management Studio.
 
-```
+```json
 "MailJet": {
     "ApiKey": "8078b8d5603638751a604e929ddfe5b5",
     "SecretKey": "SECRET_KEY_HERE"
   }
 ```
-Change ```"SecretKey": "SECRET_KEY_HERE"``` in such way that instead of ```SECRET_KEY_HERE``` there should be **the secret key I've sent** with this technical assingnment.<br />
+The paragraph about secret key is bellow is optional. If you want to recieve email list about your order details, you need to done it, otherwise - it will work fine without it :).
+<br />
+Change ```"SecretKey": "SECRET_KEY_HERE"``` in such way that instead of ```SECRET_KEY_HERE``` there should be **the secret key I' ll give you** if you ask me via Telegram (```@vitaliiiiin```).
 Example: ```"SecretKey":"8078b8d5603638751a604e929ddfe5b5"``` (don't use this key, it's just an example).
 
   **2.** When Connection string is done, write ```Update-Database``` in Package Manager Console.
@@ -37,18 +53,5 @@ Example: ```"SecretKey":"8078b8d5603638751a604e929ddfe5b5"``` (don't use this ke
   It is opened in Ms SQL Serrver Management Studio.
   It just adds examples to DataBase, so you don't need to do it by yourself.
 
-**Some information about my project's features**
-
-**1.** First registered account becomes admin-account, so you have the following permissions:
-   - you can manage Categories (e.g. add new one, delete one or rename one)
-   - you can manage Manufacturers as well (e.g. add new one, delete one or rename one)
-   - you can manage Products (e.g. rename one, change its price, its description, its category and its manufacturer)
-   - you can add a new admin
-<br />
-
-**2.** When you done your order, you will **recieve an email** with order details, so please enter real email 
-(or temp-mail if you don't wanna use your personal one).
-<br />
-All the other features you will see in the project :)
 
 P.S. If you have any troubles with this project, you can ask me via Telegram (```@vitaliiiiin```) :)
